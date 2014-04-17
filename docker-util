@@ -50,7 +50,7 @@ case "$1" in
         [[ -z `sudo docker ps | grep -e "sw-webdriver[^/]"` ]] && $0 dev webdriver
 
         sudo docker kill sw-testing && sudo docker rm sw-testing
-        sudo docker run --name sw-testing -i $BASE_ARGS --link sw-webdriver:webdriver --link sw-client:client -w /ShadowWolf/client/ ShadowWolf-dev-testing protractor Protractor.js
+        sudo docker run --name sw-testing -i $BASE_ARGS --link sw-webdriver:webdriver --link sw-client:client -w /ShadowWolf/client/ ShadowWolf-dev-testing grunt test
         ;;
       webdriver)
         sudo docker kill sw-webdriver && sudo docker rm sw-webdriver

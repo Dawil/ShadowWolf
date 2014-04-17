@@ -20,6 +20,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-cucumber');
   grunt.loadNpmTasks('grunt-ng-constant');
   grunt.loadNpmTasks('grunt-includes');
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
   // configurable paths
   var yeomanConfig = {
@@ -45,6 +46,15 @@ module.exports = function (grunt) {
         }
       }
     },
+    protractor: {
+      options: {
+        configFile: 'Protractor.js',
+        keepAlive: true,
+        noColor: false,
+      },
+      test: {
+      }
+    },
 
     yeoman: yeomanConfig,
     watch: {
@@ -59,6 +69,10 @@ module.exports = function (grunt) {
       viewincludes: {
         files: ['<%= yeoman.app %>/views/{,*/}*.html'],
         tasks: ['includes']
+      },
+      protractorTests: {
+        files: ['test/hello.js','app/**/*.{html,css,js}'],
+        tasks: ['protractor']
       },
       livereload: {
         options: {
@@ -395,7 +409,8 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'protractor:test',
+    'watch'
   ]);
 
   grunt.registerTask('build', [
