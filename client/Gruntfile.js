@@ -33,11 +33,23 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     // Build the site using grunt-includes
-    includes: {
+    includes_people: {
       build: {
         cwd: 'app/views/people/show_chunks',
         src: [ 'show.html' ],
         dest: 'app/views/people',
+        flatten: false,
+        options: {
+          includePath: '',
+          banner: '<!--included-->'
+        }
+      }
+    },
+    includes_projects: {
+      build: {
+        cwd: 'app/views/projects/show_chunks',
+        src: [ 'show.html' ],
+        dest: 'app/views/projects',
         flatten: false,
         options: {
           includePath: '',
@@ -380,7 +392,8 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'ngconstant:development',
-      'includes',
+      'includes_projects',
+      'includes_people',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -391,7 +404,8 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'includes',
+    'includes_projects',
+    'includes_people',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
@@ -402,7 +416,8 @@ module.exports = function (grunt) {
     'clean:dist',
     'ngconstant:production',
     'useminPrepare',
-    'includes',
+    'includes_projects',
+    'includes_people',
     'concurrent:dist',
     'autoprefixer',
     'concat',
