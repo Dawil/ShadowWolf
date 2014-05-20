@@ -24,10 +24,16 @@ describe('show pages',function(){
       var header = element(by.css('div > h3'));
       expect(header.getText()).toMatch(/Preferred Name/);
     });
-    
+
     xit("should be able to see the photos section", function() {
       var thumbnails = element.all(by.css('.thumbnail'));
       expect(thumbnails.count()).toBe(3);
+    });
+
+    xit("should be able to see the skills section", function() {
+      var skills = element(by.id('skills-link'));
+      expect(skills.count()).toBe(1);
+      /*should extend this test in future to test that the skills link actually works!*/
     });
 
    xit("should show the culture tab when it's clicked", function() {
