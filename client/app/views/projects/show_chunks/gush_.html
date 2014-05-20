@@ -1,0 +1,73 @@
+<editable-group object="project"
+                lens="building.legacy"
+                subgroup-class="alert alert-info col-sm-6">
+  <editable property="one_line_grab"             label="one line grab"            >helpText</editable>
+  <editable property="description_project_sheet" label="description project sheet">helpText</editable>
+  <editable property="description_awards_style"  label="description awards style" >helpText</editable>
+  <editable property="innovation_client_style"   label="innovation client style"  >helpText</editable>
+  <editable property="interesting_things"        label="interesting things"       >helpText</editable>
+  <editable property="brief_elements"            label="brief elements"           >helpText</editable>
+  <editable property="security_level"            label="security level"           >helpText</editable>
+</editable-group>
+
+<h2>initiatives</h2>
+<div ng-repeat="initiaive in project.building.legacy.initiavies">
+  <editable-group object="project"
+                  lens="building.legacy.esd.initiatives[{{initiative|id}}]"
+                  subgroup-class="alert alert-info col-sm-6">
+    <editable property="title"       label="title"      >helpText</editable>
+    <editable property="reason"      label="reason"     >helpText</editable>
+    <editable property="description" label="description">helpText</editable>
+  </editable-group>
+</div>
+
+<h2>certifications</h2>
+<editable-group object="project"
+                lens="building.legacy.esd.certifications"
+                subgroup-class="alert alert-info col-sm-6">
+  <editable property="name"          label="name"         >helpText</editable>
+  <editable property="ranking"       label="ranking"      >helpText</editable>
+  <editable property="awarding_body" label="awarding body">helpText</editable>
+  <editable property="expiry_date"   label="expiry date"  >helpText</editable>
+</editable-group>
+
+<h2>photography</h2>
+<editable-group object="project"
+                lens="building.legacy.photography"
+                subgroup-class="alert alert-info col-sm-6">
+  <editable property="photographer" label="photographer">helpText</editable>
+  <editable property="date"         label="date"        >helpText</editable>
+</editable-group>
+
+<h2>awards</h2>
+<div ng-repeat="award in project.building.legacy.awards">
+<editable-group object="project"
+                lens="building.legacy.awards[{{award|id}}]"
+                subgroup-class="alert alert-info col-sm-6">
+  <editable property="award" label="award">helpText</editable>
+  <editable property="date"  label="date" >helpText</editable>
+  <editable property="jury"  label="jury" >helpText</editable>
+</editable-group>
+
+
+<h2>testimonials</h2>
+<div ng-repeat="testimonial in project.building.legacy.testimonials">
+  <editable-group object="project"
+                  lens="building.legacy.testimonials[{{testimonial|id}}]"
+                  subgroup-class="alert alert-info col-sm-6">
+    <editable property="testimonial" label="testimonial">helpText</editable>
+    <editable property="citation"    label="citation"   >helpText</editable>
+    <editable property="date"        label="date"       >helpText</editable>
+  </editable-group>
+</div>
+
+<h2>quotes</h2>
+<div ng-repeat="quote in project.building.legacy.quotes">
+  <editable-group object="project"
+                  lens="building.legacy.quotes[{{quote|id}}]"
+                  subgroup-class="alert alert-info col-sm-6">
+    <editable property="quote"    label="quote"   >helpText</editable>
+    <editable property="citation" label="citation">helpText</editable>
+    <editable property="date"     label="date"    >helpText</editable>
+  </editable-group>
+</div>

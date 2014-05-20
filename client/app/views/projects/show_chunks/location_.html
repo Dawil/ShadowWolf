@@ -1,0 +1,28 @@
+<div class="row">
+  <h2>Location</h2>
+<div ng-repeat="location in project.building.locations" class="col-md-6">
+  <editable-group object="project"
+                  lens="building.locations[{{location|id}}].geo_json"
+                  subgroup-class="alert alert-info col-sm-12">
+    <editable property="lat"             label="latitude"       type="number">helpText</editable>
+    <editable property="lon"             label="longitude"      type="number">helpText</editable>
+    <editable property="boundary_points" label="Boundary Points">helpText</editable>
+
+   <iframe class="temp-map" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ng-src="{{'https://maps.google.com.au/?ie=UTF8&amp;ll='+subobject.lat+','+subobject.lon+'&amp;spn=0.015,0.030&amp;t=h&amp;z=16&amp;output=embed' | trustMaplink}}"></iframe>
+
+  </editable-group>
+
+  <div ng-repeat="address in location.addresses">
+    <editable-group object="project"
+                    lens="building.locations[{{location|id}}].addresses[{{address|id}}]"
+                    subgroup-class="alert alert-info col-sm-12">
+       <editable property="building_name" label="building name">helpText</editable>
+       <editable property="street_number" label="street number">helpText</editable>
+       <editable property="street"        label="street"       >helpText</editable>
+       <editable property="suburb_area"   label="suburb area"  >helpText</editable>
+       <editable property="state_county"  label="state county" >helpText</editable>
+       <editable property="country"       label="country"      >helpText</editable>
+       <editable property="postcode"      label="postcode"     >helpText</editable>
+    </editable-group>
+  </div>
+</div>
