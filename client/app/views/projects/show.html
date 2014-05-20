@@ -4,75 +4,47 @@
       <h1>The Project Name <small>{{ project.project_number }}</small></h1>
     </div>
 
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Basics</a></li>
-      <li><a href="#">Location</a></li>
-      <li><a href="#">Dimensions</a></li>
-      <li><a href="#">Phases</a></li>
-      <li><a href="#">Project Sheet source</a></li>
-    </ul>
+      <tabset>
 
+    <tab heading="Basics">
+      include "summary_.html"
+      include "client_.html"
+      include "projecct_source_.html"
+    </tab>
 
-  <div ng-show="project.building">
-    <h1>{{ project.building.address.building_name }}</h1>
-    <editable-group object="project"
-                    lens="building"
-                    subgroup-class="alert alert-info col-sm-12">
-      <editable property="description" label="Description" type="textarea">This is an internal, easy to understand summary of the project.</editable>
-      <editable property="attribution" label="Attribution">This is an internal, easy to understand summary of the project.</editable>
-      <editable property="BCA_classification" label="BCA Classification">The BCA classification of this project</editable>
-      <editable property="project_categories" label="Project Categories">A comma separated list of the catagories that this project is in</editable>
-      <editable property="project_sub_catagories" label="Project Sub-categories">A comma separated list of the catagories that this project is in. [TODO: why does this exist?]</editable>
-    </editable-group>
-
-    <div class="row">
-      <h2>Location</h2>
-    <div ng-repeat="location in project.building.locations" class="col-md-6">
-      <editable-group object="project"
-                      lens="building.locations[{{location|id}}].geo_json"
-                      subgroup-class="alert alert-info col-sm-12">
-        <editable property="lat"             label="latitude"       type="number">helpText</editable>
-        <editable property="lon"             label="longitude"      type="number">helpText</editable>
-        <editable property="boundary_points" label="Boundary Points">helpText</editable>
-
-       <iframe class="temp-map" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ng-src="{{'https://maps.google.com.au/?ie=UTF8&amp;ll='+subobject.lat+','+subobject.lon+'&amp;spn=0.015,0.030&amp;t=h&amp;z=16&amp;output=embed' | trustMaplink}}"></iframe>
-
-      </editable-group>
-
-      <div ng-repeat="address in location.addresses">
+    <tab heading="Location">
+      <div class="row">
+        <h2>Location</h2>
+      <div ng-repeat="location in project.building.locations" class="col-md-6">
         <editable-group object="project"
-                        lens="building.locations[{{location|id}}].addresses[{{address|id}}]"
+                        lens="building.locations[{{location|id}}].geo_json"
                         subgroup-class="alert alert-info col-sm-12">
-           <editable property="building_name" label="building name">helpText</editable>
-           <editable property="street_number" label="street number">helpText</editable>
-           <editable property="street"        label="street"       >helpText</editable>
-           <editable property="suburb_area"   label="suburb area"  >helpText</editable>
-           <editable property="state_county"  label="state county" >helpText</editable>
-           <editable property="country"       label="country"      >helpText</editable>
-           <editable property="postcode"      label="postcode"     >helpText</editable>
+          <editable property="lat"             label="latitude"       type="number">helpText</editable>
+          <editable property="lon"             label="longitude"      type="number">helpText</editable>
+          <editable property="boundary_points" label="Boundary Points">helpText</editable>
+
+         <iframe class="temp-map" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" ng-src="{{'https://maps.google.com.au/?ie=UTF8&amp;ll='+subobject.lat+','+subobject.lon+'&amp;spn=0.015,0.030&amp;t=h&amp;z=16&amp;output=embed' | trustMaplink}}"></iframe>
+
         </editable-group>
+
+        <div ng-repeat="address in location.addresses">
+          <editable-group object="project"
+                          lens="building.locations[{{location|id}}].addresses[{{address|id}}]"
+                          subgroup-class="alert alert-info col-sm-12">
+             <editable property="building_name" label="building name">helpText</editable>
+             <editable property="street_number" label="street number">helpText</editable>
+             <editable property="street"        label="street"       >helpText</editable>
+             <editable property="suburb_area"   label="suburb area"  >helpText</editable>
+             <editable property="state_county"  label="state county" >helpText</editable>
+             <editable property="country"       label="country"      >helpText</editable>
+             <editable property="postcode"      label="postcode"     >helpText</editable>
+          </editable-group>
+        </div>
       </div>
-    </div>
+    </tab>
 
-
-    <h2>project source</h2>
-    <editable-group object="project"
-                    lens="building.project_source"
-                    subgroup-class="alert alert-info col-sm-6">
-      <editable property="competition_win" label="competition win">helpText</editable>
-      <editable property="competition_URL" label="competition URL">helpText</editable>
-    </editable-group>
-    <h3>referred by</h3>
-    <editable-group object="project"
-                    lens="building.project_source.referred_by"
-                    subgroup-class="alert alert-info col-sm-6">
-      <editable property="BVN_staff_login"      label="BVNstaff login"     >helpText</editable>
-      <editable property="contact_name"         label="contact name"        >helpText</editable>
-      <editable property="contact_organisation" label="contact organisation">helpText</editable>
-    </editable-group>
-
-    <h2>Key Dimensions</h2>
+    <tab heading="Dimensions">
+      <h2>Key Dimensions</h2>
     <div class="row">
       <div class="col-md-4">
         <h3>Dirty size</h3>
@@ -138,15 +110,20 @@
         </editable-group>
       </div>
     </div>
+    </tab>
 
-    <h2>client</h2>
-    <editable-group object="project"
-                    lens="building.client"
-                    subgroup-class="alert alert-info col-sm-6">
-      <editable property="main"     label="Main"    >helpText</editable>
-      <editable property="direct"   label="Direct"  >helpText</editable>
-      <editable property="end_user" label="End user">helpText</editable>
-    </editable-group>
+    <tab heading="Phases">
+      include "reg_.html"
+    </tab>
+
+    <tab heading="Project Sheet source">
+      include "travel_.html"
+    </tab>
+
+  </tabset>
+
+  <div ng-show="project.building">
+
 
     <h2>relationships</h2>
     <editable-group object="project"
