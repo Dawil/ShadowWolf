@@ -33,27 +33,20 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     // Build the site using grunt-includes
-    includes_people: {
+    includes: {
       build: {
-        cwd: 'app/views/people/show_chunks',
-        src: [ 'show.html' ],
-        dest: 'app/views/people',
+        cwd: '.',
+        //src: [ 'people/show_chunks/show.html' ],
+        //dest: 'app/views/people',
+        files: [
+          {src: ['people/show_chunks/show.html'  ], dest: 'app/views/people'  },
+          {src: ['projects/show_chunks/show.html'], dest: 'app/views/projects'}
+        ],
         flatten: false,
         options: {
-          includePath: '',
-          banner: '<!--included-->'
-        }
-      }
-    },
-    includes_projects: {
-      build: {
-        cwd: 'app/views/projects/show_chunks',
-        src: [ 'show.html' ],
-        dest: 'app/views/projects',
-        flatten: false,
-        options: {
-          includePath: '',
-          banner: '<!--included-->'
+          includePath: 'app/views/',
+          banner: '<!--included-->',
+          debug: true
         }
       }
     },
@@ -392,8 +385,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'ngconstant:development',
-      'includes_projects',
-      'includes_people',
+      'includes',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -404,20 +396,20 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'includes_projects',
-    'includes_people',
+    'includes',
     'concurrent:test',
     'autoprefixer',
     'connect:test',
     'karma'
   ]);
 
+  grunt.registerTask('include', ['includes']);
+
   grunt.registerTask('build', [
     'clean:dist',
     'ngconstant:production',
     'useminPrepare',
-    'includes_projects',
-    'includes_people',
+    'includes',
     'concurrent:dist',
     'autoprefixer',
     'concat',
